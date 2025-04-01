@@ -41,9 +41,17 @@ public class SecondActivity extends AppCompatActivity {
                 soundPlayButton(sound2, sound1);
             }
         });
+
+        Button btnStop = findViewById(R.id.buttonStop);
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soundStopButton(sound1, sound2);
+            }
+        });
     }
 
-    public void goBack (View view) {
+    public void goBack(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -62,5 +70,19 @@ public class SecondActivity extends AppCompatActivity {
         }
         sound1.start();
         sound1.setLooping(true);
+    }
+
+    public void soundStopButton(MediaPlayer sound1, MediaPlayer sound2) {
+        if (sound1.isPlaying()) {
+            sound1.pause();
+            sound2.seekTo(0);
+            sound1.setLooping(false);
+        }
+
+        if (sound2.isPlaying()) {
+            sound2.pause();
+            sound1.seekTo(0);
+            sound2.setLooping(false);
+        }
     }
 }
